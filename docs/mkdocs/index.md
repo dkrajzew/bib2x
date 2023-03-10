@@ -1,4 +1,4 @@
-[![License: !!!](https://img.shields.io/badge/License-!!!-green.svg)](https://github.com/dkrajzew/bib2x/blob/master/LICENSE)
+[![License: BSD](https://img.shields.io/badge/License-BSD-green.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE)
 [![PyPI version](https://badge.fury.io/py/bib2x.svg)](https://pypi.python.org/pypi/bib2x)
 ![test](https://github.com/dkrajzew/bib2x/actions/workflows/test.yml/badge.svg)
 [![Downloads](https://pepy.tech/badge/bib2x)](https://pepy.tech/project/bib2x)
