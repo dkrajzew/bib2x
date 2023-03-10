@@ -2,15 +2,13 @@ from __future__ import print_function
 # ===================================================================
 # bib2x - A BibTex parser and converter.
 #
-# Version 0.2.
+# __init__.py - Package initialisation
 #
-# Package initialisation
-#
-# (c) Daniel Krajzewicz 2011-2014, 2023
-# - daniel@krajzewicz.de
-# - http://www.krajzewicz.de
+# (c) Daniel Krajzewicz 2011-2014, 2022-2023
+# daniel@krajzewicz.de
 # - https://github.com/dkrajzew/bib2x
-# - http://www.krajzewicz.de/blog/bib2x.php
+# - http://www.krajzewicz.de/docs/bib2x/index.html
+# - http://www.krajzewicz.de
 # 
 # Available under the BSD license.
 # ===================================================================

@@ -2,13 +2,13 @@ from __future__ import print_function
 # ===================================================================
 # bib2x - A BibTex parser and converter.
 #
-# BibTeXhandler module initialisation
+# handler.py - BibTeXhandler definition (abstract class)
 #
-# (c) Daniel Krajzewicz 2011-2014, 2023
-# - daniel@krajzewicz.de
+# (c) Daniel Krajzewicz 2011-2014, 2022-2023
+# daniel@krajzewicz.de
+# - https://github.com/dkrajzew/bib2x
+# - http://www.krajzewicz.de/docs/bib2x/index.html
 # - http://www.krajzewicz.de
-# - https://github.com/dkrajzew/degrotesque
-# - http://www.krajzewicz.de/blog/degrotesque.php
 # 
 # Available under the BSD license.
 # ===================================================================
