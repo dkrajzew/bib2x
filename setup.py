@@ -24,7 +24,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="bib2x",
-    version="0.2.0",
+    version="0.4.0",
     author="dkrajzew",
     author_email="d.krajzewicz@gmail.com",
     description="A BibTex parser and converter",
