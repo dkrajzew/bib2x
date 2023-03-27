@@ -16,7 +16,7 @@ Introduction
 
 __bib2x__ is a tool for parsing and processing BibTeX files.
 
-__bib2x__ is currently under development. The latest version is 0.2.0.
+__bib2x__ is currently under development. The latest version is 0.4.0.
 
 The current use cases are:
 
@@ -27,10 +27,16 @@ Examples
 --------
 
 ```console
-bib2x -i turing.bib -o turing.json
+bib2x -i turing.bib -o turing.json -f json
 ```
 
-Converts the BibTeX-file "turing.bib" into the JSON-file "turing.json".
+Converts the BibTeX-file "turing.bib" into the JSON-file "turing.json" with the BibTeX entries.
+
+```console
+bib2x -i turing.bib -o turing.html -f html
+```
+
+Converts the BibTeX-file "turing.bib" into a file named "turing.html" that contains a HTML list with the BibTeX entries.
 
 
 Background
@@ -94,11 +100,18 @@ Further Links
 * The github repository is located at: <https://github.com/dkrajzew/bib2x>
 * The issue tracker is located at: <https://github.com/dkrajzew/bib2x/issues>
 * The PyPI page is located at: <https://pypi.org/project/bib2x/>
-* The code documentation (pydoc) is located at: <http://www.krajzewicz.de/docs/bib2x.html>
 
 
 ChangeLog for bib2x
 ===================
+
+bib2x-0.4.0 (27.03.2023)
+------------------------
+
+* Work on the documentation
+* Added HTML output
+* Further tests
+
 
 bib2x-0.2.0 (08.03.2023)
 ------------------------
