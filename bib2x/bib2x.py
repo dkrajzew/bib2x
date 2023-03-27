@@ -25,6 +25,7 @@ except: from . import texhandler
 try:
     import texhandler
     import texhandler.json
+    import texhandler.html
 except:
     pass
 
@@ -60,7 +61,7 @@ def main(arguments=None):
     
     """
     # build options
-    optParser = OptionParser(usage="bib2x [options]", version="bib2x 0.2.0")
+    optParser = OptionParser(usage="bib2x [options]", version="bib2x 0.4.0")
     optParser.add_option("-i", "--input", dest="input", default=None, help="The BibTeX file to load")
     optParser.add_option("-o", "--output", dest="output", default=None, help="The file to write")
     optParser.add_option("-f", "--format", dest="format", default="json", help="The type of file to write ['json']")
@@ -70,11 +71,17 @@ def main(arguments=None):
         optParser.error("Input file name is missing, please use the option '--input' / '-i'.")
     if options.output is None:
         optParser.error("Output file name is missing, please use the option '--output' / '-o'.")
+    if options.format!="json" and options.format!="html":
+        optParser.error("Unknown output format; only 'json' and 'html' are supported.")
     # process
     texF = texfile.TeXfile()
     content = texF.read2string(options.input)
     fdo = open(options.output, "w")
-    handler = texhandler.json.JSONexportingTeXhandler(fdo)
+    handler = None
+    if options.format=="json":
+        handler = texhandler.json.JSONexportingTeXhandler(fdo)
+    elif options.format=="html":
+        handler = texhandler.html.HTMLexportingTeXhandler(fdo)
     texF.parse(content, handler)
     
 
