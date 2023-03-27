@@ -9,12 +9,18 @@ edit_uri: ""
 
 theme:
     name: material
-    highlightjs: true
-    hljs_languages:
-        - yaml
+    custom_dir: materials_ext
+    font: false
     palette:
-        primary: light green
+        primary: red
         
+extra_css:
+    - stylesheets/extra.css
+    - stylesheets/prism.css
+
+extra_javascript:
+    - js/prism.js
+
 nav:
     - Home: index.md
     - Installation: install.md
@@ -26,6 +32,7 @@ nav:
         - TeXfile: api_texfile.md
         - TeXhandler: api_texhandler.md
         - TeXhandler.JSON: api_texhandler_json.md
+        - TeXhandler.HTML: api_texhandler_html.md
         - TeXhandler.Memory: api_texhandler_memory.md
     - Developer Docs:
         - How To Release: release.md
