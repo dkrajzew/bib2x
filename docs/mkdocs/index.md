@@ -10,25 +10,31 @@
 
 
 Introduction
-============
+------------
 
 __bib2x__ is a tool for parsing and processing BibTeX files.
 
-__bib2x__ is currently under development. The latest version is 0.2.0.
+__bib2x__ is currently under development. The latest version is 0.4.0.
 
 The current use cases are:
 
-* Convert BibTeX-files to JSON
-
+* Convert BibTeX-files to JSON;
+* Convert BibTeX-files to a HTML list.
 
 Examples
 --------
 
 ```console
-bib2x -i turing.bib -o turing.json
+bib2x -i turing.bib -o turing.json -f json
 ```
 
-Converts the BibTeX-file "turing.bib" into the JSON-file "turing.json".
+Converts the BibTeX-file "turing.bib" into the JSON-file "turing.json" with the BibTeX entries.
+
+```console
+bib2x -i turing.bib -o turing.html -f html
+```
+
+Converts the BibTeX-file "turing.bib" into a file named "turing.html" that contains a HTML list with the BibTeX entries.
 
 
 Background

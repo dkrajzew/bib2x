@@ -10,10 +10,16 @@ Examples
 --------
 
 ```console
-bib2x -i turing.bib -o turing.json
+bib2x -i turing.bib -o turing.json -f json
 ```
 
-Converts the BibTeX-file "turing.bib" into the JSON-file "turing.json".
+Converts the BibTeX-file "turing.bib" into the JSON-file "turing.json" with the BibTeX entries.
+
+```console
+bib2x -i turing.bib -o turing.html -f html
+```
+
+Converts the BibTeX-file "turing.bib" into a file named "turing.html" that contains a HTML list with the BibTeX entries.
 
 
 Command line arguments

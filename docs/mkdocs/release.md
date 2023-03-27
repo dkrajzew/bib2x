@@ -4,7 +4,6 @@ Release Steps
 * check the [ChangeLog](https://github.com/dkrajzew/bib2x/blob/master/docs/mkdocs/changes.md)
 * patch the release number and the copyright information in
     * the [README.md](https://github.com/dkrajzew/bib2x/blob/master/README.md) file
-    * the blog pages
     * the [setup.py](https://github.com/dkrajzew/bib2x/blob/master/setup.py) file
     * the [install.md](https://github.com/dkrajzew/bib2x/blob/master/docs/mkdocs/install.md) file
     * the scripts and tests

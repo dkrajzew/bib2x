@@ -1,6 +1,9 @@
 Further Links
 =============
 
+bib2x pages
+-----------
+
 * A complete documentation is located at:
     * <https://bib2x.readthedocs.io/en/latest/> and
     * <https://krajzewicz.de/docs/bib2x/index.html>
@@ -8,11 +11,10 @@ Further Links
 * The github repository is located at: <https://github.com/dkrajzew/bib2x>
 * The issue tracker is located at: <https://github.com/dkrajzew/bib2x/issues>
 * The PyPI page is located at: <https://pypi.org/project/bib2x/>
-* The code documentation (pydoc) is located at: <http://www.krajzewicz.de/docs/bib2x.html>
 
 
-Some further BibTeX resources on github
----------------------------------------
+BibTeX on github
+----------------
 
 * <http://www.xandi.eu/bib2x/about.html>
 * <https://pypi.org/project/pybtex/>
