@@ -31,10 +31,13 @@ class JSONexportingTeXhandler(handler.BibTeXhandler):
 
     def __init__(self, fdo):
         """Constructor
+        
+        Args:
+            fdo (file descriptor): The file to write to
         """
+        self._fdo = fdo
         self._entry = ""
         self._firstEntry = True
-        self._fdo = fdo
         self._hadOne = False
 
 
@@ -50,8 +53,8 @@ class JSONexportingTeXhandler(handler.BibTeXhandler):
         This implementation does nothing.
         
         Args:
-            key (str): The shortcut for the string.
-            value (str): The value of the string.
+            key (str): The shortcut for the string
+            value (str): The value of the string
         
         Todo: 
             check whether string definition should not be saved
@@ -66,7 +69,7 @@ class JSONexportingTeXhandler(handler.BibTeXhandler):
         
         Args:
             key (str): The name of the comment?
-            value (str): The value of the comment.
+            value (str): The value of the comment
         """
         pass
 
