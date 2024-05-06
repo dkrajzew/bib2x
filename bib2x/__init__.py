@@ -15,4 +15,6 @@ from __future__ import print_function
 """
 bib2x package initialisation
 """
+from .bib2x import *
+from .texfile import *
 

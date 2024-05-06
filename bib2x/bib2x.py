@@ -61,7 +61,7 @@ def main(arguments=None):
     
     """
     # build options
-    optParser = OptionParser(usage="bib2x [options]", version="bib2x 0.4.0")
+    optParser = OptionParser(usage="bib2x [options]", version="bib2x 0.4.2")
     optParser.add_option("-i", "--input", dest="input", default=None, help="The BibTeX file to load")
     optParser.add_option("-o", "--output", dest="output", default=None, help="The file to write")
     optParser.add_option("-f", "--format", dest="format", default="json", help="The type of file to write ['json']")

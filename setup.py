@@ -24,7 +24,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="bib2x",
-    version="0.4.0",
+    version="0.4.2",
     author="dkrajzew",
     author_email="d.krajzewicz@gmail.com",
     description="A BibTex parser and converter",
@@ -41,6 +41,8 @@ setuptools.setup(
     license='BSD',
     # add modules
     packages=setuptools.find_packages(),
+    package_data={'': ["tex.db"]},
+    #data_files=[('bib2x', ["tex.db"])],
     entry_points = {
         'console_scripts': [
             'bib2x = bib2x:main'
