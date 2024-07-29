@@ -1,8 +1,7 @@
 [![License: BSD](https://img.shields.io/badge/License-BSD-green.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE)
 [![PyPI version](https://badge.fury.io/py/bib2x.svg)](https://pypi.python.org/pypi/bib2x)
-![test](https://github.com/dkrajzew/bib2x/actions/workflows/test.yml/badge.svg)
 [![Downloads](https://pepy.tech/badge/bib2x)](https://pepy.tech/project/bib2x)
-[![Coverage](https://img.shields.io/badge/coverage-90%25-success)](https://img.shields.io/badge/coverage-90%25-success)
+[![Coverage Status](https://coveralls.io/repos/github/dkrajzew/bib2x/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/bib2x?branch=main)
 [![Documentation Status](https://readthedocs.org/projects/bib2x/badge/?version=latest)](https://bib2x.readthedocs.io/en/latest/?badge=latest)
 
 
