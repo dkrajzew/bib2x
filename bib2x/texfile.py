@@ -1,33 +1,39 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
-# ===================================================================
-# bib2x - A BibTex parser and converter.
-#
-# texfile.py - A BibTex-file representation
-#
-# (c) Daniel Krajzewicz 2011-2014, 2022-2023
-# daniel@krajzewicz.de
+# ===========================================================================
+"""bib2x - A class representing a BibTeX file.
+"""
+# ===========================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2011-2014, 2020-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "0.4.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Development"
+# ===========================================================================
 # - https://github.com/dkrajzew/bib2x
 # - http://www.krajzewicz.de/docs/bib2x/index.html
 # - http://www.krajzewicz.de
-# 
-# Available under the BSD license.
-# ===================================================================
+# ===========================================================================
 
 
-# --- imports -------------------------------------------------------
+# --- imports ---------------------------------------------------------------
 import os
 import sys
 import re
 import sqlite3
 
 
-# --- debugging options ---------------------------------------------
+# --- debugging options -----------------------------------------------------
 DEBUG_SPECIAL_RECOGNITION = False
 DEBUG_SPECIAL_CODING = False
 DEBUG_UNKNOWN_CMD = False
 
 
-# --- classes -------------------------------------------------------
+# --- class definitions -----------------------------------------------------
 class TeXfile:
     """A class representing a BibTeX file"""
     

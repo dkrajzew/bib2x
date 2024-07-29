@@ -1,20 +1,26 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
-# ===================================================================
-# bib2x - A BibTex parser and converter.
-#
-# html.py - A HTML exporting BibTeX handler
-#
-# (c) Daniel Krajzewicz 2011-2014, 2022-2023
-# daniel@krajzewicz.de
+# ===========================================================================
+"""A BibTex handler that exports entries as HTML
+"""
+# ===========================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2011-2014, 2020-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "0.4.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Development"
+# ===========================================================================
 # - https://github.com/dkrajzew/bib2x
 # - http://www.krajzewicz.de/docs/bib2x/index.html
 # - http://www.krajzewicz.de
-# 
-# Available under the BSD license.
-# ===================================================================
+# ===========================================================================
 
 
-# --- format definitions --------------------------------------------
+# --- format definitions ----------------------------------------------------
 formats = {
     "periodical":       "<b>%title%</b>, ?month:%month% ?%year%.",
     "article":          "%authorREP%. <b>%title%</b>. <i>%journal%</i>?, volume:%volume%??, number:(%number%)??, pages::%pages%??, month:%month%? %year%.",
@@ -37,7 +43,7 @@ formats = {
 }
 
 
-# --- classes -------------------------------------------------------
+# --- class definitions -----------------------------------------------------
 class HTMLexportingTeXhandler:
     """A BibTex handler that exports entries as HTML."""
 
@@ -55,6 +61,7 @@ class HTMLexportingTeXhandler:
     
     def startDocument(self):
         """Called at the begin of a document's processing"""
+        self._itemIndex = 0
         self._fdo.write("<ul>\n")
     
     
@@ -120,6 +127,9 @@ class HTMLexportingTeXhandler:
         Args:
             tpl (str): The entry-type specific template to fill
             fields (dict): The dictionary of the entry's attributes
+        
+        Returns:
+            The template filled with the given values
         """
         ret = ""
         tmp = ""
@@ -168,9 +178,51 @@ class HTMLexportingTeXhandler:
         bibtexType = "article" if "bibtex-type" not in self._currentAttrs else self._currentAttrs["bibtex-type"].lower()
         self._currentAttrs["authorREP"] = ", ".join(self._currentAttrs["author"]) if "author" in self._currentAttrs else ""
         self._currentAttrs["editorREP"] = ", ".join(self._currentAttrs["editor"]) if "editor" in self._currentAttrs else ""
+        self._currentAttrs["short"] = entryID
+        
+        # bibtex key
+        ret = "[" + self._currentAttrs["short"] + "] "
+        # render bibtex
         tpl = formats[bibtexType]
-        ret = "<li>" + self.fillTemplate(tpl, self._currentAttrs) + "</li>\n"
-        self._fdo.write(ret)
+        ret += self.fillTemplate(tpl, self._currentAttrs)
+        # files
+        if "file" in self._currentAttrs:
+            name = self._currentAttrs["file"]["name"]
+            extension = os.path.splitext(name)
+            url = self._currentAttrs["file"]["url"]
+            ret += ' <a class="bpFilelink" href="' + url + '">'
+            ret += '<img border="0" src="images/' + extension + '.png" alt="' + name + '"/>';
+            ret += "</a>";
+        # URL
+        if "url" in self._currentAttrs:
+            ret += ' <a class="bpURLlink" href="' + self._currentAttrs["url"] + '"><img border="0" src="images/url.png" alt="more..."/></a>'
+        # DOI
+        if "doi" in self._currentAttrs:
+            ret += ' <a class="bpDOIlink" href="' + self._currentAttrs["doi"] + '"><img border="0" src="images/doi.png" alt="more..."/></a>'
+        # abstract
+        abstractShowOption = "trigger" # default: trigger, "trigger", "show", "off"
+        if "abstract" in self._currentAttrs:
+            if abstractShowOption=="default" or abstractShowOption=="trigger":
+                ret += ' <a class="bpAbstractT" href="" onclick="javascript:return showAbstract(' + str(self._itemIndex) + ');">Show Abstract</a><div  style="display: none;" id="abstract' + str(self._itemIndex) + '"'
+            elif abstractShowOption=="show":
+                ret += '<div'
+            if abstractShowOption=="default" or abstractShowOption=="trigger" or abstractShowOption=="show":
+                ret += ' class="bpAbstract">' + self._currentAttrs["abstract"] + '</div>';
+        # keywords
+        keywordsShowOption = "show" # default: show, "show", "off"
+        if "keywords" in self._currentAttrs:
+            listview_keywordsPre = " Keywords: "
+            listview_keywordsPost = ""
+            listview_keywordsHead = ' <span class="bpKeyword">'
+            listview_keywordsTail = '</span>'
+            ret += listview_keywordsPre
+            for k in self._currentAttrs["keywords"]:
+                ret += listview_keywordsHead + k + listview_keywordsTail
+            ret += listview_keywordsPost    
+        # write
+        self._fdo.write("<li>" + ret + "</li>\n")
+        # 
+        self._itemIndex += 1
 
 
     def endDocument(self):

@@ -1,24 +1,30 @@
-# ===================================================================
-# bib2x - A BibTex parser and converter.
-#
-# Setup module
-#
-# (c) Daniel Krajzewicz 2011-2014, 2022-2023
-# daniel@krajzewicz.de
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import print_function
+# ===========================================================================
+"""bib2x - Setup module.
+"""
+# ===========================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2011-2014, 2020-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "0.4.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Development"
+# ===========================================================================
 # - https://github.com/dkrajzew/bib2x
 # - http://www.krajzewicz.de/docs/bib2x/index.html
 # - http://www.krajzewicz.de
-# 
-# Available under the BSD license.
-# ===================================================================
+# ===========================================================================
 
 
-
-# --- imports -------------------------------------------------------
+# --- imports ---------------------------------------------------------------
 import setuptools
 
 
-# --- definitions ---------------------------------------------------
+# --- definitions -----------------------------------------------------------
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
@@ -42,7 +48,6 @@ setuptools.setup(
     # add modules
     packages=setuptools.find_packages(),
     package_data={'': ["tex.db"]},
-    #data_files=[('bib2x', ["tex.db"])],
     entry_points = {
         'console_scripts': [
             'bib2x = bib2x:main'
@@ -60,6 +65,7 @@ setuptools.setup(
         "Intended Audience :: Information Technology",
         "Intended Audience :: System Administrators",
         "Intended Audience :: Telecommunications Industry",
+        "Topic :: Documentation",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Software Development :: Localization",
         "Topic :: Text Processing :: Markup :: HTML",

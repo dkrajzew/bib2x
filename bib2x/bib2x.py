@@ -1,20 +1,26 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
-# ===================================================================
-# bib2x - A BibTex parser and converter.
-#
-# bib2x.py - Main module
-#
-# (c) Daniel Krajzewicz 2011-2014, 2022-2023
-# daniel@krajzewicz.de
+# ===========================================================================
+"""bib2x - A BibTex parser and converter.
+"""
+# ===========================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2011-2014, 2020-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "0.4.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Development"
+# ===========================================================================
 # - https://github.com/dkrajzew/bib2x
 # - http://www.krajzewicz.de/docs/bib2x/index.html
 # - http://www.krajzewicz.de
-# 
-# Available under the BSD license.
-# ===================================================================
+# ===========================================================================
 
 
-# --- imports -------------------------------------------------------
+# --- imports ---------------------------------------------------------------
 import sys, os
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from optparse import OptionParser
@@ -29,7 +35,8 @@ try:
 except:
     pass
 
-# --- functions -----------------------------------------------------
+
+# --- functions -------------------------------------------------------------
 # --- main
 def main(arguments=None):
     """Main method
@@ -61,7 +68,7 @@ def main(arguments=None):
     
     """
     # build options
-    optParser = OptionParser(usage="bib2x [options]", version="bib2x 0.4.2")
+    optParser = OptionParser(usage="bib2x [options]", version="bib2x 0.4.0")
     optParser.add_option("-i", "--input", dest="input", default=None, help="The BibTeX file to load")
     optParser.add_option("-o", "--output", dest="output", default=None, help="The file to write")
     optParser.add_option("-f", "--format", dest="format", default="json", help="The type of file to write ['json']")
@@ -85,7 +92,6 @@ def main(arguments=None):
     texF.parse(content, handler)
     
 
-
 # -- main check
 if __name__ == '__main__':
-    main(sys.argv[1:]) # pragma: no cover
+    main(sys.argv[1:])  # pragma: no cover
