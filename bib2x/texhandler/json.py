@@ -27,8 +27,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 import re
 import sqlite3
-try: from . import handler
-except: import handler
+import handler
 
 
 # --- class definitions -----------------------------------------------------

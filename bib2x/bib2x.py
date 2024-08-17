@@ -22,18 +22,11 @@ __status__     = "Development"
 
 # --- imports ---------------------------------------------------------------
 import sys, os
-sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from optparse import OptionParser
-try: import texfile
-except: from . import texfile
-try: import texhandler
-except: from . import texhandler
-try:
-    import texhandler
-    import texhandler.json
-    import texhandler.html
-except:
-    pass
+import texfile
+import texhandler.handler
+import texhandler.json
+import texhandler.html
 
 
 # --- functions -------------------------------------------------------------

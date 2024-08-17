@@ -14,21 +14,13 @@ from __future__ import print_function
 # ===================================================================
 import sys
 import os
-import shutil
-from testfixtures import TempDirectory
-from bib2x import bib2x
-from bib2x import texhandler
-from bib2x.texhandler import json
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "bib2x"))
+import bib2x
 
 
 # --- helper functions ----------------------------------------------
 def patchName(test):
     return test.replace("pytest", "bib2x").replace("pytest.py", "bib2x").replace("__main__.py", "bib2x")
-
-def bread(path):
-    with open(path, "rb") as fd:
-        return fd.read()
-
 
 
 # --- test functions ------------------------------------------------

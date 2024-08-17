@@ -18,9 +18,6 @@ __status__     = "Development"
 # - http://www.krajzewicz.de/docs/bib2x/index.html
 # - http://www.krajzewicz.de
 # ===========================================================================
-
-
-# --- imports ---------------------------------------------------------------
-from . import bib2x
+import bib2x
 
 

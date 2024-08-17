@@ -21,7 +21,10 @@ __status__     = "Development"
 
 
 # --- imports ---------------------------------------------------------------
-from . import handler
-from . import html
-from . import json
-from . import memory
+import os
+import sys
+sys.path.append(os.path.join(os.path.split(__file__)[0])) # !!!
+import handler
+import html
+import json
+import memory
