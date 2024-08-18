@@ -56,7 +56,7 @@ def test_bib2x_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """usage: bib2x [-h] [--version] [-f FORMAT] input output
+    assert patchName(captured.out.replace("optional arguments", "options")) == """usage: bib2x [-h] [--version] [-f FORMAT] input output
 
 A BibTeX converter with bst support
 
