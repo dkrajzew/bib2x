@@ -57,13 +57,11 @@ def main(arguments=None):
     
     --format / -f _&lt;FORMAT&gt;_:
         The type of file to write ['json']
-    
-    
     """
     # build options
     parser = argparse.ArgumentParser(prog='bib2x', 
         description='A BibTeX converter with bst support', 
-        epilog='(c) Daniel Krajzewicz 2020-2024')
+        epilog='(c) Daniel Krajzewicz 2011-2014, 2020-2024')
     parser.add_argument("input")
     parser.add_argument("output")
     parser.add_argument('--version', action='version', version='%(prog)s 0.4.0')
@@ -72,7 +70,7 @@ def main(arguments=None):
     # check options
     if args.format!="json" and args.format!="html":
         print("bib2x: error: Unknown output format; only 'json' and 'html' are supported.", file=sys.stderr)
-        return 2    
+        return 2
     # process
     texF = texfile.TeXfile()
     content = texF.read2string(args.input)
@@ -83,7 +81,8 @@ def main(arguments=None):
     elif args.format=="html":
         handler = texhandler.html.HTMLexportingTeXhandler(fdo)
     texF.parse(content, handler)
-    
+    return 0
+
 
 # -- main check
 if __name__ == '__main__':

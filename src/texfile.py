@@ -414,7 +414,7 @@ class TeXfile:
                 continue
             i2 = e.find(",", i1)
             entryID = e[i1+1:i2]
-            print ("%s %s" % (entryID, i1))
+            #print ("%s %s" % (entryID, i1))
             handler.startEntry(entryID)
             handler.addField(entryID, "bibtex-type", entryType)
             haveNext = True
