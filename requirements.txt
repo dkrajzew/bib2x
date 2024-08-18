@@ -1,4 +1,6 @@
 pytest
+coverage
+testfixtures
 mkdocs
 mkdocs-material
 mkdocstrings
