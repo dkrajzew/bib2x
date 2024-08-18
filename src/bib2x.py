@@ -22,7 +22,7 @@ __status__     = "Development"
 
 # --- imports ---------------------------------------------------------------
 import sys, os
-from optparse import OptionParser
+import argparse
 import texfile
 import texhandler.handler
 import texhandler.json
@@ -61,30 +61,31 @@ def main(arguments=None):
     
     """
     # build options
-    optParser = OptionParser(usage="bib2x [options]", version="bib2x 0.4.0")
-    optParser.add_option("-i", "--input", dest="input", default=None, help="The BibTeX file to load")
-    optParser.add_option("-o", "--output", dest="output", default=None, help="The file to write")
-    optParser.add_option("-f", "--format", dest="format", default="json", help="The type of file to write ['json']")
-    options, remaining_args = optParser.parse_args(args=arguments)
+    parser = argparse.ArgumentParser(prog='bib2x', 
+        description='A BibTeX converter with bst support', 
+        epilog='(c) Daniel Krajzewicz 2020-2024')
+    parser.add_argument("input")
+    parser.add_argument("output")
+    parser.add_argument('--version', action='version', version='%(prog)s 0.4.0')
+    parser.add_argument("-f", "--format", default="json", help="The type of file to write ['json']")
+    args = parser.parse_args(arguments)
     # check options
-    if options.input is None:
-        optParser.error("Input file name is missing, please use the option '--input' / '-i'.")
-    if options.output is None:
-        optParser.error("Output file name is missing, please use the option '--output' / '-o'.")
-    if options.format!="json" and options.format!="html":
-        optParser.error("Unknown output format; only 'json' and 'html' are supported.")
+    if args.format!="json" and args.format!="html":
+        print("bib2x: error: Unknown output format; only 'json' and 'html' are supported.", file=sys.stderr)
+        return 2    
     # process
     texF = texfile.TeXfile()
-    content = texF.read2string(options.input)
-    fdo = open(options.output, "w")
+    content = texF.read2string(args.input)
+    fdo = open(args.output, "w")
     handler = None
-    if options.format=="json":
+    if args.format=="json":
         handler = texhandler.json.JSONexportingTeXhandler(fdo)
-    elif options.format=="html":
+    elif args.format=="html":
         handler = texhandler.html.HTMLexportingTeXhandler(fdo)
     texF.parse(content, handler)
     
 
 # -- main check
 if __name__ == '__main__':
-    main(sys.argv[1:])  # pragma: no cover
+    ret = main(sys.argv[1:]) # pragma: no cover
+    sys.exit(ret) # pragma: no cover

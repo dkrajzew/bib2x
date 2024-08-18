@@ -34,9 +34,8 @@ def test_main_empty(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert patchName(captured.out) == ""
-    assert patchName(captured.err) == """Usage: bib2x [options]
-
-bib2x: error: Input file name is missing, please use the option '--input' / '-i'.
+    assert patchName(captured.err) == """usage: bib2x [-h] [--version] [-f FORMAT] input output
+bib2x: error: the following arguments are required: input, output
 """
 
 
@@ -49,17 +48,21 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out) == """Usage: bib2x [options]
+    assert patchName(captured.out) == """usage: bib2x [-h] [--version] [-f FORMAT] input output
 
-Options:
-  --version             show program's version number and exit
+A BibTeX converter with bst support
+
+positional arguments:
+  input
+  output
+
+options:
   -h, --help            show this help message and exit
-  -i INPUT, --input=INPUT
-                        The BibTeX file to load
-  -o OUTPUT, --output=OUTPUT
-                        The file to write
-  -f FORMAT, --format=FORMAT
+  --version             show program's version number and exit
+  -f FORMAT, --format FORMAT
                         The type of file to write ['json']
+
+(c) Daniel Krajzewicz 2020-2024
 """
 
 
