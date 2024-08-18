@@ -14,7 +14,7 @@ from __future__ import print_function
 # ===================================================================
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "bib2x"))
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
 import bib2x
 
 

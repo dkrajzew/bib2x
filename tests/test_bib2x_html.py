@@ -16,7 +16,7 @@ import sys
 import os
 import shutil
 from testfixtures import TempDirectory
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "bib2x"))
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
 import bib2x
 import texhandler
 import texhandler.html
