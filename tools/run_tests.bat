@@ -1,2 +1,4 @@
+cd ..
 pytest .\
+cd tools
 
