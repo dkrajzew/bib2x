@@ -1,18 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-# ===========================================================================
-"""A BibTex handler that exports entries as HTML
-"""
-# ===========================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2011-2014, 2020-2024, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
-__version__    = "0.4.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Development"
+"""A BibTex handler that exports entries as HTML"""
 # ===========================================================================
 # - https://github.com/dkrajzew/bib2x
 # - http://www.krajzewicz.de/docs/bib2x/index.html
@@ -49,7 +37,7 @@ class HTMLexportingTeXhandler:
 
     def __init__(self, fdo):
         """Constructor
-        
+
         Args:
             fdo (file descriptor): The file to write to
         """
@@ -57,39 +45,39 @@ class HTMLexportingTeXhandler:
         self._stringMap = {}
         self._currentBibTeXKey = None
         self._currentAttrs = {}
-    
-    
+
+
     def startDocument(self):
         """Called at the begin of a document's processing"""
         self._itemIndex = 0
         self._fdo.write("<ul>\n")
-    
-    
+
+
     def addStringDefinition(self, key, value):
         """Adds the definition of a string
-        
+
         Args:
             key (str): The shortcut for the string.
             value (str): The value of the string.
         """
         self._stringMap[key] = value
-        
-    
+
+
     def addComment(self, key, value):
         """Adds a comment
-        
+
         Args:
             key (str): The name of the comment?
             value (str): The value of the comment
-        
+
         todo: Check semantics
         """
         pass
 
-    
+
     def startEntry(self, entryID):
         """Called if a new entry is started to being parsed.
-        
+
         Args:
             entryID (str): The ID (key) of the entry
         """
@@ -99,7 +87,7 @@ class HTMLexportingTeXhandler:
 
     def addField(self, entryID, key, value):
         """Called if a new attribute of an entry shall be added.
-        
+
         Args:
             entryID (str): The ID (key) of the entry
             key (str): The name of the attribute
@@ -110,9 +98,9 @@ class HTMLexportingTeXhandler:
 
     def addField2(self, entryID, key, pairs):
         """Called if a new attribute consisting of multiple named fields shall be added.
-        
+
         This is only used when parsing JabRef file-fields.
-        
+
         Args:
             entryID (str): The ID (key) of the entry
             key (str): The name of the attribute
@@ -123,13 +111,13 @@ class HTMLexportingTeXhandler:
 
     def fillTemplate(self, tpl, fields):
         """Parses the template and fills it with the given values
-        
+
         Args:
             tpl (str): The entry-type specific template to fill
             fields (dict): The dictionary of the entry's attributes
-        
+
         Returns:
-            The template filled with the given values
+            (str): The template filled with the given values
         """
         ret = ""
         tmp = ""
@@ -171,7 +159,7 @@ class HTMLexportingTeXhandler:
 
     def closeEntry(self, entryID):
         """Closes the entry
-        
+
         Args:
             entryID (str): The ID (key) of the entry
         """
@@ -179,7 +167,7 @@ class HTMLexportingTeXhandler:
         self._currentAttrs["authorREP"] = ", ".join(self._currentAttrs["author"]) if "author" in self._currentAttrs else ""
         self._currentAttrs["editorREP"] = ", ".join(self._currentAttrs["editor"]) if "editor" in self._currentAttrs else ""
         self._currentAttrs["short"] = entryID
-        
+
         # bibtex key
         ret = "[" + self._currentAttrs["short"] + "] "
         # render bibtex
@@ -218,14 +206,13 @@ class HTMLexportingTeXhandler:
             ret += listview_keywordsPre
             for k in self._currentAttrs["keywords"]:
                 ret += listview_keywordsHead + k + listview_keywordsTail
-            ret += listview_keywordsPost    
+            ret += listview_keywordsPost
         # write
         self._fdo.write("<li>" + ret + "</li>\n")
-        # 
+        #
         self._itemIndex += 1
 
 
     def endDocument(self):
         """Called after parsing a document"""
         self._fdo.write("</ul>\n")
-        

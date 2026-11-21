@@ -1,7 +1,6 @@
-API
-===
+# API
 
-::: src.texhandler.json
+::: bib2x.texhandler.json
     docstring_style: "google"
     filters: [""]
     show_source: False

@@ -4,12 +4,12 @@ site_description: A BibTex parser and converter.
 site_author: Daniel Krajzewicz
 docs_dir: ./docs
 
-repo_url: https://github.com/dkrajzew/bib2x.git
+repo_url: https://github.com/dkrajzew/bib2x
 edit_uri: ""
 
 theme:
     name: material
-    custom_dir: materials_ext
+    custom_dir: ./docs/materials_ext
     font: false
     palette:
         primary: red
@@ -24,18 +24,17 @@ extra_javascript:
 nav:
     - Home: index.md
     - Installation: install.md
-    - Usage: 
-        - Command Line: cmd.md
+    - Command Line: cmd.md
     - Links: links.md
     - API:
         - bib2x: api_bib2x.md
+        - bibtex: api_bibtex.md
         - TeXfile: api_texfile.md
         - TeXhandler: api_texhandler.md
         - TeXhandler.JSON: api_texhandler_json.md
         - TeXhandler.HTML: api_texhandler_html.md
         - TeXhandler.Memory: api_texhandler_memory.md
-    - Developer Docs:
-        - How To Release: release.md
+        - BSTParser: api_bstparser.md
     - ChangeLog: changes.md
     - License (BSD): license.md
     - Legal: legal.md
@@ -44,7 +43,7 @@ markdown_extensions:
     - admonition
     - sane_lists
   
-copyright: "&copy; Copyright 2011&ndash;2014, 2023 Daniel Krajzewicz."
+copyright: "&copy; Copyright 2011&ndash;2014, 2023&ndash;2025 Daniel Krajzewicz."
 
 use_directory_urls: false
 
@@ -53,7 +52,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [./]
+                paths: [./src/]
                 options:
                     filters: [""]
                     show_source: False

@@ -1,20 +1,17 @@
-Further Links
-=============
+# Further Links
 
-bib2x pages
------------
+## bib2x pages
 
-* A complete documentation is located at:
-    * <https://bib2x.readthedocs.io/en/latest/> and
-    * <https://krajzewicz.de/docs/bib2x/index.html>
+* A complete documentation is located at: <https://bib2x.readthedocs.io/en/latest/>
 * Discussions are open at <https://github.com/dkrajzew/bib2x/discussions>
 * The github repository is located at: <https://github.com/dkrajzew/bib2x>
 * The issue tracker is located at: <https://github.com/dkrajzew/bib2x/issues>
 * The PyPI page is located at: <https://pypi.org/project/bib2x/>
 
 
-BibTeX on github
-----------------
+## BibTeX on github
+
+There are many projects around BibTeX. Here are some I want to investigate...
 
 * <http://www.xandi.eu/bib2x/about.html>
 * <https://pypi.org/project/pybtex/>

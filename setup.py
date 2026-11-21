@@ -55,7 +55,7 @@ setuptools.setup(
     },
     # see https://pypi.org/classifiers/
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
+        "Development Status :: 3 - Alpha",
         "Environment :: Console",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",

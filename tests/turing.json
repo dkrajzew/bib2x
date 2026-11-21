@@ -1,5 +1,4 @@
-var bib={
- "entries":{
+"entries":[
   "Turing:1935:ELR":{
    "bibtex-type":"Article",
    "author":['A. M. Turing'],
@@ -4171,5 +4170,4 @@ var bib={
    "subject-dates":"1912&ndash;1954",
    "tableofcontents":"Foreword / Donald W. Davies <br/>Introduction / B. Jack Copeland <br/>Part I: The National Physical Laboratory and the ACE Project <br/>A Century of Measurement and Computation at the National Physical Laboratory, 1900&ndash;2000 / Eileen Magnello <br/>The Creation of the NPL Mathematics Division / Mary Croarken <br/>The Origins and Development of the ACE Project / B. Jack Copeland <br/>The Pilot ACE at the National Physical Laboratory, James H. Wilkinson <br/>Part II: Turing and the History of Computing <br/>The ACE and the Shaping of British Computing / Martin Campbell-Kelly <br/>Computer Architecture and the ACE Computers / Robert Doran <br/>Turing and the Computer / B. Jack Copeland and Diane Proudfoot <br/>From Turing Machine to &ldquo;Electronic Brain&rdquo; / Teresa Numerico <br/>Part III: The ACE Computers <br/>The Pilot ACE Instruction Format / Henry John Norton <br/>Programming the Pilot ACE / J.G. Hayes <br/>The Pilot ACE: from Concept to Reality / Robin A. Vowels <br/>The DEUCE &mdash; a User&rsquo;s View / Robin A. Vowels <br/>Applications of the Pilot ACE and the DEUCE / Tom Vickers <br/>The ACE Test Assembly, the Pilot ACE, the Big ACE, and the Bendix G15 / Harry D. Huskey <br/>The ACE Simulator and the Cybernetic Model / Michael Woodger <br/>The Pilot Model and the Big ACE on the Web / Benjamin Wells <br/>Part IV: Electronics <br/>How Valves Work / David O. Clayden <br/>Recollections of Early Vacuum Tube Circuits / Maurice Wilkes <br/>Circuit Design of the Pilot ACE and the Big ACE / David O. Clayden <br/>Part V: Technical Reports and Lectures on the ACE and the Pilot ACE, 1945&ndash;1951 <br/>Proposed Electronic Calculator (1945) / Alan M. Turing <br/>Notes on Memory (1945) / Alan M. Turing <br/>The Turing&ndash;Wilkinson Lecture Series (1946&ndash;1947) / Alan M. Turing and James H. Wilkinson <br/>The State of the Art in Electronic Digital Computing in Britain and the United States (1947) / Harry D. Huskey"
   }
- }
-};
+]

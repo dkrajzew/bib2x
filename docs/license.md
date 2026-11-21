@@ -1,7 +1,6 @@
-BSD 3-Clause License
-====================
+# BSD 3-Clause License
 
-Copyright (c) 2011&ndash;2014, 2022&ndash;2023, Daniel Krajzewicz
+Copyright (c) 2011&ndash;2014, 2022&ndash;2025, Daniel Krajzewicz
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

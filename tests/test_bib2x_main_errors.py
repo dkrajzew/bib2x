@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-# ===========================================================================
-"""Tests for error handling in bib2x"""
+"""bib2x - Tests for error handling in bib2x"""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2011-2014, 2020-2024, Daniel Krajzewicz"
+__copyright__  = "Copyright 2023-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "BSD"
 __version__    = "0.4.0"
@@ -22,8 +20,8 @@ __status__     = "Development"
 # --- imports ---------------------------------------------------------------
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
-import bib2x
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+import bib2x.bib2x as bib2x
 
 
 # --- helper functions ----------------------------------------------
@@ -38,5 +36,5 @@ def test_bib2x_main_unknown_target(capsys):
     assert ret==2
     captured = capsys.readouterr()
     assert patchName(captured.out) == ""
-    assert patchName(captured.err) == """bib2x: error: Unknown output format; only 'json' and 'html' are supported.
+    assert patchName(captured.err) == """bib2x: error: Unknown output format 'xxx'; only 'json' and 'html' are supported.
 """

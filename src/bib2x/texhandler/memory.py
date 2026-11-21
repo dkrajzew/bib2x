@@ -1,18 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-# ===========================================================================
-"""A BibTeX handler keeping the entries in memory
-"""
-# ===========================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2011-2014, 2020-2024, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
-__version__    = "0.4.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Development"
+"""A BibTeX handler keeping the entries in memory"""
 # ===========================================================================
 # - https://github.com/dkrajzew/bib2x
 # - http://www.krajzewicz.de/docs/bib2x/index.html
@@ -23,8 +11,6 @@ __status__     = "Development"
 # --- imports ---------------------------------------------------------------
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-
 import re
 import sqlite3
 import handler
@@ -33,51 +19,50 @@ import handler
 # --- class definitions -----------------------------------------------------
 class StoringTeXhandler(handler.BibTeXhandler):
     """A BibTeX handler keeping the entries in memory"""
-    
+
     def __init__(self):
-        """Constructor
-        """
+        """Constructor"""
+        handler.BibTeXhandler.__init__(self, False, False)
         self._entries = {}
         self._entryIDs = []
         self._stringMap = {}
         self._stringMapKeys = []
-    
         self._groupNames = []
         self._groups = {}
 
-    
+
     def startDocument(self):
         """Called at the begin of a document's processing"""
         pass
-    
-    
+
+
     def addStringDefinition(self, key, value):
         """Adds the definition of a string
 
         Stores the definition in the self._stringMap dictionary.
-        
+
         Args:
             key (str): The shortcut for the string.
             value (str): The value of the string.
-        
-        Todo: 
+
+        Todo:
             Remove self._stringMapKeys
         """
         self._stringMap[key] = value
         self._stringMapKeys.append(key)
 
-    
+
     def addComment(self, key, value):
         """Adds a comment
-        
+
         This implementation is somehow "magic" as it targets
         parsing JabRef comments that contain a group assignment.
-        
+
         Args:
             key (str): The name of the comment?
             value (str): The value of the comment.
-        
-        Todo: 
+
+        Todo:
             Extract JabRef-parsing.
         """
         if not value.strip().startswith("jabref-meta: groupstree"):
@@ -99,7 +84,7 @@ class StoringTeXhandler(handler.BibTeXhandler):
                     tree = tree[:-(lastLevel - level + 1)]
                 lastLevel = level
                 tree.append(name)
-        
+
                 if level!=0:
                     d = c[c.find(";")+1:].strip()
                     d = d[d.find(";")+1:d.rfind(";")]
@@ -112,13 +97,13 @@ class StoringTeXhandler(handler.BibTeXhandler):
                     self._groups[gName].extend(items)
                 #print "------------\n" + c[:20]
                 c = ""
-    
-    
+
+
     def startEntry(self, entryID):
         """Called if a new entry is started to being parsed.
 
         Begins entry by storing it in internal containers.
-        
+
         Args:
             entryID (str): The ID (key) of the entry
         """
@@ -128,9 +113,9 @@ class StoringTeXhandler(handler.BibTeXhandler):
 
     def addField(self, entryID, key, value):
         """Called if a new attribute of an entry shall be added.
-        
+
         Stores the attribute in the self._entries[entryID] dictionary.
-        
+
         Args:
             entryID (str): The ID (key) of the entry
             key (str): The name of the attribute
@@ -141,10 +126,10 @@ class StoringTeXhandler(handler.BibTeXhandler):
 
     def addField2(self, entryID, key, pairs):
         """Called if a new attribute consisting of multiple named fields shall be added.
-        
+
         Allocates a dictionary entry in self._entries[entryID] with the given key.
         Inserts the given pairs as key/values into this dictionary.
-        
+
         Args:
             entryID (str): The ID (key) of the entry
             key (str): The name of the attribute
@@ -155,10 +140,10 @@ class StoringTeXhandler(handler.BibTeXhandler):
         for p in pairs:
             self._entries[entryID][key][p[0]] = p[1]
 
-    
+
     def closeEntry(self, entryID):
         """Closes the entry
-        
+
         Args:
             entryID (str): The ID (key) of the entry
         """
@@ -168,4 +153,3 @@ class StoringTeXhandler(handler.BibTeXhandler):
     def endDocument(self):
         """Called after parsing a document"""
         pass
-        

@@ -1,7 +1,6 @@
-API
-===
+# API
 
-::: src.texfile
+::: bib2x.texfile
     docstring_style: "google"
     filters: [""]
     show_source: False

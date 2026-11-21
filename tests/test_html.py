@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-# ===========================================================================
-"""Tests for bib2x HTML output"""
+"""bib2x - Tests for bib2x HTML output"""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2011-2014, 2020-2024, Daniel Krajzewicz"
+__copyright__  = "Copyright 2011-2014, 2023-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "BSD"
 __version__    = "0.4.0"
@@ -24,10 +22,8 @@ import sys
 import os
 import shutil
 from testfixtures import TempDirectory
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
-import bib2x
-import texhandler
-import texhandler.html
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+import bib2x.bib2x as bib2x
 
 
 # --- helper functions ----------------------------------------------

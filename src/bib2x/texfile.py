@@ -1,18 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-# ===========================================================================
-"""bib2x - A class representing a BibTeX file.
-"""
-# ===========================================================================
-__author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2011-2014, 2020-2024, Daniel Krajzewicz"
-__credits__    = ["Daniel Krajzewicz"]
-__license__    = "BSD"
-__version__    = "0.4.0"
-__maintainer__ = "Daniel Krajzewicz"
-__email__      = "daniel@krajzewicz.de"
-__status__     = "Development"
+"""A class representing a BibTeX file."""
 # ===========================================================================
 # - https://github.com/dkrajzew/bib2x
 # - http://www.krajzewicz.de/docs/bib2x/index.html
@@ -36,10 +24,10 @@ DEBUG_UNKNOWN_CMD = False
 # --- class definitions -----------------------------------------------------
 class TeXfile:
     """A class representing a BibTeX file"""
-    
-    def __init__(self):
+
+    def __init__(self, properties_remove=None, properties_keep=None):
         """Initialisation
-        
+
         Todo:
             Extract DB entries and set them up as Python definitions?
         """
@@ -56,7 +44,10 @@ class TeXfile:
         self._tex_conv = cur.fetchall()
         cur.execute('SELECT * FROM repl')
         self._tex_repl = cur.fetchall()
-        
+        # options
+        self._properties_remove = None if properties_remove is None else properties_remove.split(",")
+        self._properties_keep = None if properties_keep is None else properties_keep.split(",")
+
 
     def _decodeCommand(self, cmd, optArgs, content, ret):
         if DEBUG_SPECIAL_RECOGNITION: print ("decode: '" + cmd + "/" + content + "'")
@@ -92,7 +83,7 @@ class TeXfile:
         if cmd[0]=='\\':
             return cmd[1:], False
         return cmd, False
-        
+
 
     def _decodeCommand2(self, cmd, optArgs, content, w, beg, end, currPos):
         ret = {}
@@ -114,8 +105,8 @@ class TeXfile:
             if DEBUG_SPECIAL_RECOGNITION: print ("here's s")
             currPos = self._skipSpaces(w, currPos)
         return r, currPos
-        
-    
+
+
     def _findMatchingBracket(self, w, beg, o="{", c="}"):
         i = beg
         l = 0
@@ -129,8 +120,8 @@ class TeXfile:
             i = i + 1
         print ("error: Missing closing bracket '%s'" % w[beg:])
         return len(w)
-        
-        
+
+
     def _skipSpaces(self, w, i):
         while i<len(w) and w[i].isspace():
             i = i + 1
@@ -169,7 +160,7 @@ class TeXfile:
                         t1, i = self._decodeCommand2(w[procB:cmdEnd].strip(), optArgs, dec, w, beg, end, i)
                         r = r + t1
                         i = q + 1
-                        e1 = True                    
+                        e1 = True
                     if not e1 and w[i]=='|':
                         # escaped command, with a bracketed parameter
                         if DEBUG_SPECIAL_CODING: print ("2b: %s %s %s" % (procB, i, w))
@@ -184,7 +175,7 @@ class TeXfile:
                         if DEBUG_SPECIAL_CODING: print ("1b: %s %s %s %s %s" % (procB, i, w, len(w), end))
                         r = r + "<br/>"
                         i = self._skipSpaces(w, i + 1)
-                        e1 = True 
+                        e1 = True
                     if not e1 and (w[i]==' ' or w[i]=='\\' or (i>=procB+2 and not w[i].isalpha() and w[procB+1].isalpha())):
                         # escaped command, closed by a trailing blank
                         if DEBUG_SPECIAL_CODING: print ("1: %s %s %s %s %s" % (procB, i, w, len(w), end))
@@ -218,7 +209,7 @@ class TeXfile:
                 if w[i]=='\n':
                     r = r + ' '
                 else:
-                    r = r + w[i]                    
+                    r = r + w[i]
                 i = i + 1
         for t in self._tex_repl:
             r = r.replace(str(t[0]), str(t[1]))
@@ -235,19 +226,19 @@ class TeXfile:
                 r2 = r2 + "&rsquo;"
             else:
                 r2 = r2 + r[j]
-        r = r2            
+        r = r2
         r = re.sub("\s+" , " ", r)
-        return r, i    
-                
+        return r, i
+
 
     def _splitHTMLaware(self, what):
         """Splits the given string at ';' and ',', assuring that a split
              is not done if the occured ';' belongs to a HTML-encoded special
              character
-        
+
         Args:
             what (str): The string to split
-            
+
         Returns:
             (List[str]): The split string
         """
@@ -264,9 +255,11 @@ class TeXfile:
                 isHTML = False
         ret.append(what[b:].strip())
         return ret
-                    
+
 
     def _convValue(self, value, lastItem):
+        if len(value)==0:
+            raise ValueError("closing bracket is missing")
         # this may be the document ending bracket
         if lastItem and value[-1]=="}":
             value = value[:-1]
@@ -283,8 +276,8 @@ class TeXfile:
                 else:
                     b = value.find("\\", b+1)
         return value
-    
-    
+
+
     def _escaped(self, src, i):
         if i==0:
             return False
@@ -333,17 +326,16 @@ class TeXfile:
             elif len(src)==i2 or (src[i2:i2+1]==cdelim and (i2==0 or src[i2-1:i2]!="\\")):
                 no = no - 1
                 if len(src)==i2 or no==0:
-                    value = src[i1+1:i2]#.strip()
+                    value = src[i1+1:i2]
                     if odelim=='{':
                         value = value.strip()
-                    #print "        %s %s" % (value, len(src))
                     completeValue = completeValue + self._convValue(value, cdelim=="," and len(src)==i2)
                     while i2<len(src):
                         i2 = i2 + 1
                         if src[i2-1]=='#':
                             break
                         if src[i2-1]==',' or src[i2-1]=='}':
-                            return key, completeValue, i2+1, True    
+                            return key, completeValue, i2+1, True
                     if i2==len(src):
                         return key, completeValue, i2+1, True
                     no = 0
@@ -353,33 +345,26 @@ class TeXfile:
 
 
 
-    def read2string(self, file, skipComments=True, convertSpaces=True):
-        """Reads the file optionally discarding comments and replacing tabs by spaces
-        
-        Args:
-            file (str): The name of the file to read
-            skipComments (bool): Whether comments shall be removed
-            convertSpaces (bool): Whether tabs shall be converted to spaces
-        
-        Returns:
-            (str): The file contents, optionally stripped and without tabs
-        """
-        fdi = open(file)
-        c = []
-        for l in fdi.readlines():
-            if skipComments:
-                if len(l)>0 and l[0]=='%':
-                    continue
-            c.append(l)
-        fdi.close()
-        c = " ".join(c)
-        if convertSpaces:
-            c = c.replace("\t", " ")
-        return c
+    def _checkToAdd(self, key):
+        if self._properties_remove is not None and key in self._properties_remove:
+            return False
+        if self._properties_keep is not None and key not in self._properties_keep:
+            return False
+        return True
+
+
+    def _checkAddField(self, handler, entryID, key, value):
+        if self._checkToAdd(key):
+            handler.addField(entryID, key, value)
+
+    def _checkAddField2(self, handler, entryID, key, pairs):
+        if self._checkToAdd(key):
+            handler.addField(entryID, key, pairs)
 
 
 
-    def parse(self, c, handler):
+
+    def parse(self, c, handler, report_keys=False):
         handler.startDocument()
         b1 = 0
         while b1<len(c):
@@ -416,7 +401,9 @@ class TeXfile:
             entryID = e[i1+1:i2]
             #print ("%s %s" % (entryID, i1))
             handler.startEntry(entryID)
-            handler.addField(entryID, "bibtex-type", entryType)
+            if report_keys:
+                print (entryID)
+            self._checkAddField(handler, entryID, "bibtex-type", entryType)
             haveNext = True
             i2 += 1
             while haveNext:
@@ -425,24 +412,24 @@ class TeXfile:
                     hadOne = True
                     if key=="keywords":
                         w = self._splitHTMLaware(value)
-                        handler.addField(entryID, key, w)
-                    elif key=="author" or key=="editor":            
+                        self._checkAddField(handler, entryID, key, w)
+                    elif key=="author" or key=="editor":
                         value = value.replace(" AND ", " and ")
                         if value.find(" and ")>=0:
                             w = value.split(" and ")
                         else:
                             w = [ value ]
-                        handler.addField(entryID, key, w)
+                        self._checkAddField(handler, entryID, key, w)
                     elif key=="file":
                         value = value.replace("http//", "http://").replace("http\\:", "http:").replace("http\\\\:", "http:")
                         a1 = value.find(':')
-                        a2 = value.rfind(':')            
+                        a2 = value.rfind(':')
                         w = [ value[:a1], value[a1+1:a2], value[a2+1:] ]
                         if len(w)==3 and len(w[1])!=0:# and w[2].lower()=="url":
                             pairs = []
-                            pairs.append(["name", w[0]])                        
-                            pairs.append(["url", w[1]])                        
-                            handler.addField2(entryID, key, pairs)
+                            pairs.append(["name", w[0]])
+                            pairs.append(["url", w[1]])
+                            self._checkAddField2(handler, entryID, key, pairs)
                         else:
                             hadOne = False
                     elif key=="year":
@@ -455,15 +442,42 @@ class TeXfile:
                         year = 0
                         try: year = int(value)
                         except: pass
-                        handler.addField(entryID, key, year)
+                        self._checkAddField(handler, entryID, key, year)
                     elif key=="pages":
                         value = value.replace("--", "&ndash;")
                         value = value.replace("-", "&ndash;")
                         value = value.replace(" ", "")
-                        handler.addField(entryID, key, value)
+                        self._checkAddField(handler, entryID, key, value)
                     else:
-                        handler.addField(entryID, key, value)
+                        self._checkAddField(handler, entryID, key, value)
                     if e[i2:i2+1]==",":
                         i2 += 1
             handler.closeEntry(entryID)
         handler.endDocument()
+
+
+
+
+    def read2string(self, file, skipComments=True, convertSpaces=True):
+        """Reads the file optionally discarding comments and replacing tabs by spaces
+
+        Args:
+            file (str): The name of the file to read
+            skipComments (bool): Whether comments shall be removed
+            convertSpaces (bool): Whether tabs shall be converted to spaces
+
+        Returns:
+            (str): The file contents, optionally stripped and without tabs
+        """
+        fdi = open(file)
+        c = []
+        for l in fdi.readlines():
+            if skipComments:
+                if len(l)>0 and l[0]=='%':
+                    continue
+            c.append(l)
+        fdi.close()
+        c = " ".join(c)
+        if convertSpaces:
+            c = c.replace("\t", " ")
+        return c
