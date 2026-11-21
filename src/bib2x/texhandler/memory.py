@@ -11,9 +11,8 @@
 # --- imports ---------------------------------------------------------------
 import os
 import sys
-import re
-import sqlite3
-import handler
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import bib2x.texhandler.handler as handler
 
 
 # --- class definitions -----------------------------------------------------
@@ -88,7 +87,7 @@ class StoringTeXhandler(handler.BibTeXhandler):
                 if level!=0:
                     d = c[c.find(";")+1:].strip()
                     d = d[d.find(";")+1:d.rfind(";")]
-                    items = filter(None, d.split("\;"))
+                    items = filter(None, d.split(";")) # was \;
                     gName = "/".join(tree)
                     if gName not in self._groupNames:
                         self._groupNames.append(gName)

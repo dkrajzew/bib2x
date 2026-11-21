@@ -30,7 +30,7 @@ The following arguments must be given:
 import argparse
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import bib2x.texfile as texfile
 import bib2x.texhandler.json as jsonhandler
 import bib2x.texhandler.html as htmlhandler

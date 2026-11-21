@@ -13,7 +13,8 @@ import os
 import sys
 import re
 import sqlite3
-import handler
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import bib2x.texhandler.handler as handler
 
 
 # --- class definitions -----------------------------------------------------
