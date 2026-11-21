@@ -82,34 +82,8 @@ def test_bib2x_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patchName(captured.out.replace("optional arguments", "options")) == """usage: bib2x [-h] [--version] [-f FORMAT] [--report.keys]
-             [--properties.remove PROPERTIES_REMOVE]
-             [--properties.keep PROPERTIES_KEEP] [--json.compact]
-             [--json.indent JSON_INDENT]
-             input output
-
-A BibTeX converter with bst support
-
-positional arguments:
-  input
-  output
-
-options:
-  -h, --help            show this help message and exit
-  --version             show program's version number and exit
-  -f FORMAT, --format FORMAT
-                        The type of file to write ['json', 'html']
-  --report.keys         report keys when parsing
-  --properties.remove PROPERTIES_REMOVE
-                        remove listed properties
-  --properties.keep PROPERTIES_KEEP
-                        keep only listed properties
-  --json.compact        write each entry into one line
-  --json.indent JSON_INDENT
-                        the level of indentation to use
-
-(c) Daniel Krajzewicz 2011-2014, 2023-2025
-"""
+    help_text = HELP_PRE_3_13 if sys.version_info < (3,13) else HELP_POST_3_13
+    assert patchName(captured.out.replace("optional arguments", "options")) == help_text
 
 
 def test_bib2x_main_version(capsys):
@@ -138,3 +112,61 @@ def test_bib2x_main_turing2html(capsys, tmp_path):
     assert o.read_text() == """<ul>\n<li>[Turing:1935:ELR] A. M. Turing. <b>Equivalence of left and right almost periodicity</b>. <i>Journal of the London Mathematical Society</i>, volume:10, pages::284&ndash;285 1935. <a class="bpURLlink" href="http://turing.ecs.soton.ac.uk/browse.php/B/10"><img border="0" src="images/url.png" alt="more..."/></a> Keywords:  <span class="bpKeyword">almost periodic functions</span> <span class="bpKeyword">Dirichlet series</span></li>\n</ul>\n"""
 
 
+
+
+HELP_PRE_3_13 = """usage: bib2x [-h] [--version] [-f FORMAT] [--report.keys]
+             [--properties.remove PROPERTIES_REMOVE]
+             [--properties.keep PROPERTIES_KEEP] [--json.compact]
+             [--json.indent JSON_INDENT]
+             input output
+
+A BibTeX converter with bst support
+
+positional arguments:
+  input
+  output
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  -f FORMAT, --format FORMAT
+                        The type of file to write ['json', 'html']
+  --report.keys         report keys when parsing
+  --properties.remove PROPERTIES_REMOVE
+                        remove listed properties
+  --properties.keep PROPERTIES_KEEP
+                        keep only listed properties
+  --json.compact        write each entry into one line
+  --json.indent JSON_INDENT
+                        the level of indentation to use
+
+(c) Daniel Krajzewicz 2011-2014, 2023-2025
+"""
+
+HELP_POST_3_13 = """usage: bib2x [-h] [--version] [-f FORMAT] [--report.keys]
+             [--properties.remove PROPERTIES_REMOVE]
+             [--properties.keep PROPERTIES_KEEP] [--json.compact]
+             [--json.indent JSON_INDENT]
+             input output
+
+A BibTeX converter with bst support
+
+positional arguments:
+  input
+  output
+
+options:
+  -h, --help            show this help message and exit
+  --version             show program's version number and exit
+  -f, --format FORMAT   The type of file to write ['json', 'html']
+  --report.keys         report keys when parsing
+  --properties.remove PROPERTIES_REMOVE
+                        remove listed properties
+  --properties.keep PROPERTIES_KEEP
+                        keep only listed properties
+  --json.compact        write each entry into one line
+  --json.indent JSON_INDENT
+                        the level of indentation to use
+
+(c) Daniel Krajzewicz 2011-2014, 2023-2025
+"""

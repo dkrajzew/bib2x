@@ -90,7 +90,7 @@ def test_bibtex_main_minbst(capsys, tmp_path):
     p1 = tmp_path / "min.bst"
     p1.write_text("""ENTRY {}{}{}
 FUNCTION {test}
-{"de la Cierva y Codorn{\’\i}u, Juan"
+{"de la Cierva y Codorn{\\’\\i}u, Juan"
 #1 "{ff - }{vv - }{ll}" format.name$ top$}
 READ
 EXECUTE{test}
